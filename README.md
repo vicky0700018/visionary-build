@@ -1,29 +1,31 @@
-# Welcome to your Lovable project
+# INFRAVISION BUILDCON LLP
 
-This project was built with [Lovable](https://lovable.dev).
+Continuation of https://github.com/vicky0700018/visionary-build-port. The original JavaScript public/admin components, mock data, and photography are retained; pages, styling, and verification complete the unfinished website.
 
-## Build with Lovable
+## Run locally
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Install Node.js and npm, then run:
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+npm install
 npm run dev
 ```
 
-## Built with
+## Demo management
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+Open `/admin/login`. Default demonstration credentials: `admin` / `Admin@123`.
+Content and inquiry changes persist only in localStorage in the current browser. They are not transmitted to the company, shared between devices, or secure. Do not enter real customer data. Restore Demo Data requires confirmation and removes local edits, inquiries, and the demo session.
+
+## Verify and publish
+
+```sh
+npm run test
+npm run build
+npm run preview
+```
+
+Publish through Lovable for the existing platform runtime and hosted photographs. This repository already uses TanStack Start's platform bootstrap; the site features are JavaScript React and Tailwind and do not call a backend, database, or authentication service. The platform route wrappers remain TypeScript. It is not an independent plain-Vite static SPA, so do not select `dist` blindly for external hosting: use a TanStack Start-compatible deployment adapter and its generated output. Hosted photo pointers rely on Lovable's asset serving; external hosting needs the photos transferred and their URLs updated.
+
+Before publishing, verify public navigation/back and forward, mobile menus, portfolio search/filters/details, gallery enlargement/Escape, demo form validation, inquiry management, login/logout, all content editors, refresh persistence, and demo restoration. This demo admin is not suitable as a production CMS without secure authentication and persistent server-side storage.
+
+Developer credit: Designed and development by SOSynch Ai Tech.
