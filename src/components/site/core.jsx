@@ -4,9 +4,9 @@ import {cloneDefaults,readData,STORAGE_KEY,safeImage} from '../../data/demo';
 const SiteContext=createContext(null);
 export function SiteProvider({children}){
  const [data,setData]=useState(cloneDefaults),[ready,setReady]=useState(false),[session,setSession]=useState(false),[notice,setNotice]=useState('');
- useEffect(()=>{setData(readData(localStorage));try{setSession(localStorage.getItem('infravision-admin')==='demo');}catch{}setReady(true);},[]);
+ useEffect(()=>{try{setData(readData(localStorage));}catch{setData(cloneDefaults());}try{setSession(localStorage.getItem('infravision-admin')==='demo');}catch{}setReady(true);},[]);
  useEffect(()=>{if(!ready)return;try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));}catch{setNotice('Browser storage is unavailable or full. Your changes will not survive a refresh.');}},[data,ready]);
- useEffect(()=>{if(!ready)return;const styles=document.documentElement.style;const mapping={primary:'--primary',accent:'--accent',muted:'--muted-foreground',background:'--background'};for(const [key,token] of Object.entries(mapping)){if(/^#[a-f\d]{6}$/i.test(data.settings[key]))styles.setProperty(token,data.settings[key]);}document.title=data.settings.title;},[data.settings,ready]);
+ useEffect(()=>{if(!ready)return;const styles=document.documentElement.style;const mapping={primary:'--primary',accent:'--accent',muted:'--muted-foreground',background:'--concrete'};for(const [key,token] of Object.entries(mapping)){if(/^#[a-f\d]{6}$/i.test(data.settings[key]))styles.setProperty(token,data.settings[key]);}document.title=data.settings.title;document.querySelector('meta[name="description"]')?.setAttribute('content',data.settings.description);},[data.settings,ready]);
  useEffect(()=>{function sync(event){if(event.key===STORAGE_KEY)setData(readData(localStorage));if(event.key==='infravision-admin')setSession(event.newValue==='demo');}window.addEventListener('storage',sync);return()=>window.removeEventListener('storage',sync);},[]);
  const login=()=>{setSession(true);try{localStorage.setItem('infravision-admin','demo');}catch{}};
  const logout=()=>{setSession(false);try{localStorage.removeItem('infravision-admin');}catch{}};
